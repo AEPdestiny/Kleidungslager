@@ -32,7 +32,7 @@ public class SecurityConfig {
 
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://kleidungslager.onrender.com"
+                "https://kleidungslager-frontend.onrender.com"
         ));
 
         config.setAllowedMethods(List.of(
