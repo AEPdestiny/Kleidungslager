@@ -16,6 +16,7 @@ public class KleidungController {
         shirt.setId(1L);
         shirt.setBezeichnung("T-Shirt Basic");
         shirt.setSize(Kleidungsstuecke.Size.M);
+        shirt.setLager(1L);
         shirt.setFarbe("Schwarz");
         shirt.setKategorie(Kleidungsstuecke.Kategorie.HEMD);
         shirt.setLagerbestand(24);
@@ -24,6 +25,7 @@ public class KleidungController {
         jeans.setId(2L);
         jeans.setBezeichnung("Jeans Regular");
         jeans.setSize(Kleidungsstuecke.Size.L);
+        jeans.setLager(2L);
         jeans.setFarbe("Blau");
         jeans.setKategorie(Kleidungsstuecke.Kategorie.HOSE);
         jeans.setLagerbestand(12);
