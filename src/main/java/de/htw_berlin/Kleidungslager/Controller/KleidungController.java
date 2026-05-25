@@ -4,32 +4,30 @@ import de.htw_berlin.Kleidungslager.Entity.Kleidungsstuecke;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import de.htw_berlin.Kleidungslager.Repository.KleidungRepository;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/kleidung")
 public class KleidungController {
 
+    private final KleidungRepository kleidungRepository;
+
+    public KleidungController(KleidungRepository kleidungRepository) {
+        this.kleidungRepository = kleidungRepository;
+    }
+
     @GetMapping
     public List<Kleidungsstuecke> getKleidung() {
-        Kleidungsstuecke shirt = new Kleidungsstuecke();
-        shirt.setId(1L);
-        shirt.setBezeichnung("T-Shirt Basic");
-        shirt.setSize(Kleidungsstuecke.Size.M);
-        shirt.setLager(1L);
-        shirt.setFarbe("Schwarz");
-        shirt.setKategorie(Kleidungsstuecke.Kategorie.HEMD);
-        shirt.setLagerbestand(24);
+        return kleidungRepository.findAll();
+    }
 
-        Kleidungsstuecke jeans = new Kleidungsstuecke();
-        jeans.setId(2L);
-        jeans.setBezeichnung("Jeans Regular");
-        jeans.setSize(Kleidungsstuecke.Size.L);
-        jeans.setLager(2L);
-        jeans.setFarbe("Blau");
-        jeans.setKategorie(Kleidungsstuecke.Kategorie.HOSE);
-        jeans.setLagerbestand(12);
-
-        return List.of(shirt, jeans);
+    @PostMapping
+    public Kleidungsstuecke createKleidung(
+            @RequestBody Kleidungsstuecke kleidungsstueck
+    ) {
+        return kleidungRepository.save(kleidungsstueck);
     }
 }

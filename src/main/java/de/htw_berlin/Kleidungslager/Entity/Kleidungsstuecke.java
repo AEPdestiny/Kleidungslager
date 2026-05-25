@@ -1,7 +1,17 @@
 package de.htw_berlin.Kleidungslager.Entity;
 
-public class Kleidungsstuecke {
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
+@Entity
+public class Kleidungsstuecke {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long lager;
@@ -10,10 +20,12 @@ public class Kleidungsstuecke {
 
     private String bezeichnung;
 
+    @Enumerated(EnumType.STRING)
     private Size size;
 
     private String farbe;
 
+    @Enumerated(EnumType.STRING)
     private Kategorie kategorie;
 
     private String beschreibung;
