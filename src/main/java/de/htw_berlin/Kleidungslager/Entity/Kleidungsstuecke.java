@@ -30,6 +30,7 @@ public class Kleidungsstuecke {
 
     private String beschreibung;
 
+    @Transient
     private Benutzer benutzer;
 
     public enum Size {
