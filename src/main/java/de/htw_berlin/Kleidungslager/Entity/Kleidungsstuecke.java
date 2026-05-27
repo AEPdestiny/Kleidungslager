@@ -1,6 +1,7 @@
 package de.htw_berlin.Kleidungslager.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,9 @@ public class Kleidungsstuecke {
     private Kategorie kategorie;
 
     private String beschreibung;
+
+    @Column(columnDefinition = "TEXT")
+    private String bild;
 
     @Transient
     private Benutzer benutzer;
@@ -73,6 +77,9 @@ public class Kleidungsstuecke {
 
     public String getBeschreibung() { return beschreibung; }
     public void setBeschreibung(String beschreibung) { this.beschreibung = beschreibung; }
+
+    public String getBild() { return bild; }
+    public void setBild(String bild) { this.bild = bild; }
 
     public String getFarbe() { return farbe; }
     public void setFarbe(String farbe) { this.farbe = farbe; }

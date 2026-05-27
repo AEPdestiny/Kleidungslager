@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import de.htw_berlin.Kleidungslager.Repository.KleidungRepository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,50 @@ public class KleidungController {
     public Kleidungsstuecke createKleidung(
             @RequestBody Kleidungsstuecke kleidungsstueck
     ) {
+        Kleidungsstuecke vorhandenesKleidungsstueck =
+                kleidungRepository
+                        .findByBezeichnungIgnoreCaseAndSizeAndLagerAndKategorieAndFarbeIgnoreCase(
+                                kleidungsstueck.getBezeichnung(),
+                                kleidungsstueck.getSize(),
+                                kleidungsstueck.getLager(),
+                                kleidungsstueck.getKategorie(),
+                                kleidungsstueck.getFarbe()
+                        )
+                        .orElse(null);
+
+        if (vorhandenesKleidungsstueck != null) {
+            vorhandenesKleidungsstueck.setLagerbestand(
+                    vorhandenesKleidungsstueck.getLagerbestand()
+                            + kleidungsstueck.getLagerbestand()
+            );
+
+            if (kleidungsstueck.getBild() != null && !kleidungsstueck.getBild().isBlank()) {
+                vorhandenesKleidungsstueck.setBild(kleidungsstueck.getBild());
+            }
+
+            return kleidungRepository.save(vorhandenesKleidungsstueck);
+        }
+
         return kleidungRepository.save(kleidungsstueck);
+    }
+
+    @PutMapping("/{id}/bestand")
+    public Kleidungsstuecke updateBestand(
+            @PathVariable Long id,
+            @RequestBody Kleidungsstuecke kleidungsstueck
+    ) {
+        Kleidungsstuecke vorhandenesKleidungsstueck =
+                kleidungRepository.findById(id).orElseThrow();
+
+        vorhandenesKleidungsstueck.setLagerbestand(
+                kleidungsstueck.getLagerbestand()
+        );
+
+        vorhandenesKleidungsstueck.setLager(
+                kleidungsstueck.getLager()
+        );
+
+        return kleidungRepository.save(vorhandenesKleidungsstueck);
     }
 
     @DeleteMapping("/{id}")
