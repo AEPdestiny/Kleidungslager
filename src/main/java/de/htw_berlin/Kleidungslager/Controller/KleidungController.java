@@ -74,6 +74,10 @@ public class KleidungController {
                 kleidungsstueck.getLager()
         );
 
+        if (kleidungsstueck.getBild() != null) {
+            vorhandenesKleidungsstueck.setBild(kleidungsstueck.getBild());
+        }
+
         return kleidungRepository.save(vorhandenesKleidungsstueck);
     }
 
