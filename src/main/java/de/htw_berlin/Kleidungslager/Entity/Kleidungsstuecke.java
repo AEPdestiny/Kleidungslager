@@ -21,6 +21,8 @@ public class Kleidungsstuecke {
 
     private String bezeichnung;
 
+    private String artikelnummer;
+
     @Enumerated(EnumType.STRING)
     private Size size;
 
@@ -65,6 +67,9 @@ public class Kleidungsstuecke {
 
     public String getBezeichnung() { return bezeichnung; }
     public void setBezeichnung(String bezeichnung) { this.bezeichnung = bezeichnung; }
+
+    public String getArtikelnummer() { return artikelnummer; }
+    public void setArtikelnummer(String artikelnummer) { this.artikelnummer = artikelnummer; }
 
     public Size getSize() { return size; }
     public void setSize(Size size) { this.size = size; }

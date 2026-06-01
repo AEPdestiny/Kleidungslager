@@ -52,6 +52,10 @@ public class KleidungController {
                 vorhandenesKleidungsstueck.setBild(kleidungsstueck.getBild());
             }
 
+            if (kleidungsstueck.getArtikelnummer() != null && !kleidungsstueck.getArtikelnummer().isBlank()) {
+                vorhandenesKleidungsstueck.setArtikelnummer(kleidungsstueck.getArtikelnummer());
+            }
+
             return kleidungRepository.save(vorhandenesKleidungsstueck);
         }
 
@@ -66,6 +70,30 @@ public class KleidungController {
         Kleidungsstuecke vorhandenesKleidungsstueck =
                 kleidungRepository.findById(id).orElseThrow();
 
+        if (kleidungsstueck.getBezeichnung() != null) {
+            vorhandenesKleidungsstueck.setBezeichnung(
+                    kleidungsstueck.getBezeichnung()
+            );
+        }
+
+        if (kleidungsstueck.getSize() != null) {
+            vorhandenesKleidungsstueck.setSize(
+                    kleidungsstueck.getSize()
+            );
+        }
+
+        if (kleidungsstueck.getKategorie() != null) {
+            vorhandenesKleidungsstueck.setKategorie(
+                    kleidungsstueck.getKategorie()
+            );
+        }
+
+        if (kleidungsstueck.getFarbe() != null) {
+            vorhandenesKleidungsstueck.setFarbe(
+                    kleidungsstueck.getFarbe()
+            );
+        }
+
         vorhandenesKleidungsstueck.setLagerbestand(
                 kleidungsstueck.getLagerbestand()
         );
@@ -76,6 +104,10 @@ public class KleidungController {
 
         if (kleidungsstueck.getBild() != null) {
             vorhandenesKleidungsstueck.setBild(kleidungsstueck.getBild());
+        }
+
+        if (kleidungsstueck.getArtikelnummer() != null) {
+            vorhandenesKleidungsstueck.setArtikelnummer(kleidungsstueck.getArtikelnummer());
         }
 
         return kleidungRepository.save(vorhandenesKleidungsstueck);
