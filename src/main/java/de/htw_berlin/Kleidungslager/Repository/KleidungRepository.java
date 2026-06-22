@@ -8,9 +8,11 @@ import java.util.Optional;
 public interface KleidungRepository
         extends JpaRepository<Kleidungsstuecke, Long> {
 
+    Optional<Kleidungsstuecke> findFirstByArtikelnummerIgnoreCase(String artikelnummer);
+
     Optional<Kleidungsstuecke> findByBezeichnungIgnoreCaseAndSizeAndLagerAndKategorieAndFarbeIgnoreCase(
             String bezeichnung,
-            Kleidungsstuecke.Size size,
+            String size,
             Long lager,
             Kleidungsstuecke.Kategorie kategorie,
             String farbe
