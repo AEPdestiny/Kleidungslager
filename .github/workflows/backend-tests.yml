@@ -21,5 +21,8 @@ jobs:
       - name: Gradle einrichten
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Backend-Tests ausführen
+      - name: Gradle Wrapper ausfuehrbar machen
+        run: chmod +x ./gradlew
+
+      - name: Backend-Tests ausfuehren
         run: ./gradlew test
